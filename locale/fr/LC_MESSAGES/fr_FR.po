@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: css2gpl 1.0\n"
+"POT-Creation-Date: 2020-03-14 17:57+0100\n"
+"PO-Revision-Date: 2020-03-14 17:57+0100\n"
+"Last-Translator: LeKiwiDeBx <LeKiwiDeBx@chezmoi.fr>\n"
+"Language-Team: LeKiwiDeBx\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;N_\n"
+"X-Poedit-SearchPath-0: css2gpl_plugin.pl\n"
+
+#: css2gpl_plugin.pl:202
+msgid ""
+"\n"
+"Recherche le fichier: "
+msgstr ""
+"\n"
+"Recherche le fichier: "
+
+#: css2gpl_plugin.pl:210
+msgid "Nom du fichier css inconnu."
+msgstr "Nom du fichier css inconnu."
+
+#: css2gpl_plugin.pl:235 css2gpl_plugin.pl:246 css2gpl_plugin.pl:279
+msgid "Echec ecriture du fichier gpl"
+msgstr "Echec ecriture du fichier gpl"
+
+#: css2gpl_plugin.pl:834
+msgid ""
+"\n"
+"Ecriture du fichier gpl (en tête)"
+msgstr ""
+"\n"
+"TRAD Ecriture du fichier gpl (en tête)"
+
+#: css2gpl_plugin.pl:836
+msgid ""
+"\n"
+"Ecriture du fichier gpl (données)"
+msgstr ""
+"\n"
+"TRAD Ecriture du fichier gpl (données)"
+
+#~ msgid "Hide this notification message"
+#~ msgstr "Masquer ce message de notification"

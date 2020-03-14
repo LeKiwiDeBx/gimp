@@ -5,6 +5,7 @@ use warnings;
 use Gimp;
 use Gimp::Fu;
 use File::Basename;
+
 use Data::Dumper qw(Dumper);
 my $fCss;    # descripteur fichier CSS
 my $fGpl;    # descripteur fichier GPL
@@ -198,15 +199,15 @@ EOF
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub loadFileCss {
         my $f = shift @_;
-        print "\nRecherche le fichier: " . basename($f) . "\n" if defined $f;
+        print __"\nRecherche le fichier: " . basename($f) . "\n" if defined $f;
         if ( defined $f ) {
             open( $fCss, "<", $f )
-              or die "Echec ouverture du fichier $f : $!";
+              or die ("Echec ouverture du fichier $f : $!");
             print "Ouverture du fichier $f\n";
             &message($f);
 
         }
-        else { die "Nom du fichier css inconnu." }
+        else { die __"Nom du fichier css inconnu." }
 
     }
 
@@ -228,10 +229,10 @@ EOF
 "Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
                   if -e "$1.gpl";
                 open( $fGpl, ">", $1 . ".gpl" )
-                  or die "Echec ecriture du fichier : $1.gpl!";
+                  or die ("Echec ecriture du fichier : $1.gpl!");
                 $n = $1 unless defined $n;
             }
-            else { die "Echec ecriture du fichier gpl"; }
+            else { die __"Echec ecriture du fichier gpl"; }
         }
         else {
             if ( $css =~ /$NoExt/ ) {
@@ -239,10 +240,10 @@ EOF
 "Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
                   if -e "$1.gpl";
                 open( $fGpl, ">", $1 . ".gpl" )
-                  or die "Echec ecriture du fichier : $1.gpl!";
+                  or die ("Echec ecriture du fichier : $1.gpl!");
                 $n = $1 unless defined $n;
             }
-            else { die "Echec ecriture du fichier gpl"; }
+            else { die __"Echec ecriture du fichier gpl"; }
         }
         $n =~ s/^\s+|\s+$//g if defined $n;
         if   ( defined $c ) { $c = 1 unless ( $c =~ /^\d+$/ ) }
@@ -267,15 +268,15 @@ EOF
             unless ( $f =~ /^(\w+)/ ) { $f = $css; }
             if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
                 open( $fGpl, ">>", $1 . ".gpl" )
-                  or die "Echec ecriture du fichier : $1.gpl!";
+                  or die ("Echec ecriture du fichier : $1.gpl!");
             }
         }
         else {
             if ( $css =~ /$NoExt/ ) {
                 open( $fGpl, ">>", $1 . ".gpl" )
-                  or die "Echec ecriture du fichier : $1.gpl!";
+                  or die ("Echec ecriture du fichier : $1.gpl!");
             }
-            else { die "Echec ecriture du fichier gpl"; }
+            else { die __"Echec ecriture du fichier gpl"; }
         }
         print($Body );    #sortie ecran
         return my $success = print $fGpl $Body;
@@ -290,7 +291,7 @@ EOF
     sub readFileCss {
         my $f = shift @_;
         my $l = "";
-        open( $fCss, "<", $f ) or die "Echec ouverture du fichier css : $!";
+        open( $fCss, "<", $f ) or die ("Echec ouverture du fichier css : $!");
         while ( defined( $l = <$fCss> ) ) {
             chomp $l;
             my @hexaList = extractHexaList($l);
@@ -823,15 +824,16 @@ s/([[:xdigit:]]{6})\s(.*)/sprintf "%3d %3d %3d %s %-20s %-48.48s", $r, $g, $b, $
     }
 
 ########## __MAIN__ ############################################################
+    
     my $File    = $file_css;    # main dialog box inputs
     my $FileGpl = $file_gpl;
     $n = $name;                 #palette name
     $c = $column;               #palette number column
     loadFileCss($File);
     readFileCss($File);
-    print "\nEcriture du fichier gpl (en tête)"
+    print __"\nEcriture du fichier gpl (en tête)"
       if writeHeaderFileGpl( $FileGpl, $File );
-    print "\nEcriture du fichier gpl (données)"
+    print __"\nEcriture du fichier gpl (données)"
       if writeBodyFileGpl( $FileGpl, $File );
     print "\n";
 
@@ -930,13 +932,13 @@ See GIMP user manual L<https://www.gimp.org/docs/>
 
 =head1 PARAMETERS
 
-    [PF_FILE,   "file_css", "File CSS ",""],
-    [PF_FILE, "file_gpl", "File GPL ", ""],
-    [PF_STRING, "name", "Palette name ", ""],
-    [PF_SPINNER, "column", "Column number ",1,[1,10,1]],
-    [PF_RADIO, "model", "Select model ",0,[Rgb=>0,Hsv=>1]],
-    [PF_RADIO, "col", "Order by column ", 0,[RH=>0,GS=>1,BV=>2]],
-    [PF_BOOL,"order", "Order by ascending ", [ASC=>0,DESC=>1],"TRUE "],
+    [PF_FILE,   "file_css", __"File CSS ",""],
+    [PF_FILE, "file_gpl", __"File GPL ", ""],
+    [PF_STRING, "name", __"Palette name ", ""],
+    [PF_SPINNER, "column", __"Column number ",1,[1,10,1]],
+    [PF_RADIO, "model", __"Select model ",0,[Rgb=>0,Hsv=>1]],
+    [PF_RADIO, "col", __"Order by column ", 0,[RH=>0,GS=>1,BV=>2]],
+    [PF_BOOL,"order", __"Order by ascending ", [ASC=>0,DESC=>1],"TRUE "],
 
 =head1 AUTHOR
 
