@@ -1,0 +1,35 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Data::Dumper qw(Dumper)	css2gpl_plugin	8;"	u
+File::Basename	css2gpl_plugin	7;"	u
+Gimp	css2gpl_plugin	5;"	u
+Gimp::Fu	css2gpl_plugin	6;"	u
+colorName2rgb	css2gpl_plugin	777;"	s
+doLineGpl	css2gpl_plugin	798;"	s
+extractColorNamed	css2gpl_plugin	486;"	s
+extractComment	css2gpl_plugin	434;"	s
+extractHexa	css2gpl_plugin	454;"	s
+extractHexaList	css2gpl_plugin	467;"	s
+extractRgbHsl	css2gpl_plugin	513;"	s
+hexa2rgb	css2gpl_plugin	636;"	s
+hsl2Rgb	css2gpl_plugin	586;"	s
+hue2Rgb	css2gpl_plugin	618;"	s
+loadFileCss	css2gpl_plugin	199;"	s
+message	css2gpl_plugin	169;"	s
+readFileCss	css2gpl_plugin	290;"	s
+remainder	css2gpl_plugin	187;"	s
+rgb2hexa	css2gpl_plugin	671;"	s
+rgb2hsv	css2gpl_plugin	688;"	s
+sortChannels	css2gpl_plugin	749;"	s
+sortHsv	css2gpl_plugin	727;"	s
+sortQuery	css2gpl_plugin	350;"	s
+sortQuery2	css2gpl_plugin	396;"	s
+strict	css2gpl_plugin	3;"	u
+v5.10	css2gpl_plugin	2;"	u
+warnings	css2gpl_plugin	4;"	u
+writeBodyFileGpl	css2gpl_plugin	262;"	s
+writeHeaderFileGpl	css2gpl_plugin	220;"	s
