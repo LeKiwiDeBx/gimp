@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: css2gpl 1.0\n"
-"POT-Creation-Date: 2020-03-14 17:57+0100\n"
-"PO-Revision-Date: 2020-03-14 17:57+0100\n"
+"POT-Creation-Date: 2020-03-14 18:29+0100\n"
+"PO-Revision-Date: 2020-03-14 18:29+0100\n"
 "Last-Translator: LeKiwiDeBx <LeKiwiDeBx@chezmoi.fr>\n"
 "Language-Team: LeKiwiDeBx\n"
 "Language: fr\n"
@@ -24,15 +24,23 @@ msgstr ""
 "\n"
 "Recherche le fichier: "
 
+#: css2gpl_plugin.pl:205
+msgid "Echec ouverture du fichier"
+msgstr "TRAD Echec ouverture du fichier gpl"
+
+#: css2gpl_plugin.pl:206
+msgid "Ouverture du fichier"
+msgstr "TRAD Echec ouverture du fichier gpl"
+
 #: css2gpl_plugin.pl:210
 msgid "Nom du fichier css inconnu."
 msgstr "Nom du fichier css inconnu."
 
-#: css2gpl_plugin.pl:235 css2gpl_plugin.pl:246 css2gpl_plugin.pl:279
+#: css2gpl_plugin.pl:235 css2gpl_plugin.pl:246 css2gpl_plugin.pl:280
 msgid "Echec ecriture du fichier gpl"
 msgstr "Echec ecriture du fichier gpl"
 
-#: css2gpl_plugin.pl:834
+#: css2gpl_plugin.pl:843
 msgid ""
 "\n"
 "Ecriture du fichier gpl (en tête)"
@@ -40,7 +48,7 @@ msgstr ""
 "\n"
 "TRAD Ecriture du fichier gpl (en tête)"
 
-#: css2gpl_plugin.pl:836
+#: css2gpl_plugin.pl:845
 msgid ""
 "\n"
 "Ecriture du fichier gpl (données)"

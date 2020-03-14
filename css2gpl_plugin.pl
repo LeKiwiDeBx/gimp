@@ -202,12 +202,12 @@ EOF
         print __"\nRecherche le fichier: " . basename($f) . "\n" if defined $f;
         if ( defined $f ) {
             open( $fCss, "<", $f )
-              or die ("Echec ouverture du fichier $f : $!");
-            print "Ouverture du fichier $f\n";
+              or die __("Echec ouverture du fichier") . " $f : $!" );
+            print __("Ouverture du fichier") . " $f\n";
             &message($f);
 
         }
-        else { die __"Nom du fichier css inconnu." }
+        else { die __ "Nom du fichier css inconnu." }
 
     }
 
@@ -219,39 +219,40 @@ EOF
 # return:
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub writeHeaderFileGpl {
-        my ( $f, $css ) = @_;
-        my $NoExt =
-          '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
-        if ( defined $f ) {
-            unless ( $f =~ /^(\w+)/ ) { $f = $css; }
-            if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
-                die
+          my ( $f, $css ) = @_;
+          my $NoExt =
+            '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
+          if ( defined $f ) {
+              unless ( $f =~ /^(\w+)/ ) { $f = $css; }
+              if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
+                  die
 "Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
-                  if -e "$1.gpl";
-                open( $fGpl, ">", $1 . ".gpl" )
-                  or die ("Echec ecriture du fichier : $1.gpl!");
-                $n = $1 unless defined $n;
-            }
-            else { die __"Echec ecriture du fichier gpl"; }
-        }
-        else {
-            if ( $css =~ /$NoExt/ ) {
-                die
+                    if -e "$1.gpl";
+                  open( $fGpl, ">", $1 . ".gpl" )
+                    or die("Echec ecriture du fichier : $1.gpl!");
+                  $n = $1 unless defined $n;
+              }
+              else { die __ "Echec ecriture du fichier gpl"; }
+          }
+          else {
+              if ( $css =~ /$NoExt/ ) {
+                  die
 "Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
-                  if -e "$1.gpl";
-                open( $fGpl, ">", $1 . ".gpl" )
-                  or die ("Echec ecriture du fichier : $1.gpl!");
-                $n = $1 unless defined $n;
-            }
-            else { die __"Echec ecriture du fichier gpl"; }
-        }
-        $n =~ s/^\s+|\s+$//g if defined $n;
-        if   ( defined $c ) { $c = 1 unless ( $c =~ /^\d+$/ ) }
-        else                { $c = 1; }
-        my $datestring = localtime();
-        $c .= "\n" . "#\n# Initial file: $css" . "\n" . "# Create: $datestring";
-        printf( "${Header}", $n, $c );    # sortie ecran
-        return my $success = printf( $fGpl "${Header}", $n, $c );
+                    if -e "$1.gpl";
+                  open( $fGpl, ">", $1 . ".gpl" )
+                    or die("Echec ecriture du fichier : $1.gpl!");
+                  $n = $1 unless defined $n;
+              }
+              else { die __ "Echec ecriture du fichier gpl"; }
+          }
+          $n =~ s/^\s+|\s+$//g if defined $n;
+          if ( defined $c ) { $c = 1 unless ( $c =~ /^\d+$/ ) }
+          else { $c = 1; }
+          my $datestring = localtime();
+          $c .=
+            "\n" . "#\n# Initial file: $css" . "\n" . "# Create: $datestring";
+          printf( "${Header}", $n, $c );    # sortie ecran
+          return my $success = printf( $fGpl "${Header}", $n, $c );
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -261,25 +262,25 @@ EOF
 # return: succes de l'ecriture
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub writeBodyFileGpl {
-        my ( $f, $css ) = @_;
-        my $NoExt =
-          '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
-        if ( defined $f ) {
-            unless ( $f =~ /^(\w+)/ ) { $f = $css; }
-            if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
-                open( $fGpl, ">>", $1 . ".gpl" )
-                  or die ("Echec ecriture du fichier : $1.gpl!");
+          my ( $f, $css ) = @_;
+          my $NoExt =
+            '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
+          if ( defined $f ) {
+              unless ( $f =~ /^(\w+)/ ) { $f = $css; }
+              if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
+                  open( $fGpl, ">>", $1 . ".gpl" )
+                    or die("Echec ecriture du fichier : $1.gpl!");
             }
-        }
-        else {
-            if ( $css =~ /$NoExt/ ) {
-                open( $fGpl, ">>", $1 . ".gpl" )
-                  or die ("Echec ecriture du fichier : $1.gpl!");
-            }
-            else { die __"Echec ecriture du fichier gpl"; }
-        }
-        print($Body );    #sortie ecran
-        return my $success = print $fGpl $Body;
+          }
+          else {
+              if ( $css =~ /$NoExt/ ) {
+                  open( $fGpl, ">>", $1 . ".gpl" )
+                    or die("Echec ecriture du fichier : $1.gpl!");
+              }
+              else { die __ "Echec ecriture du fichier gpl"; }
+          }
+          print($Body );    #sortie ecran
+          return my $success = print $fGpl $Body;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -289,57 +290,57 @@ EOF
 # return: en texte mis en forme les couleurs et commentaires au format GPL
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub readFileCss {
-        my $f = shift @_;
-        my $l = "";
-        open( $fCss, "<", $f ) or die ("Echec ouverture du fichier css : $!");
-        while ( defined( $l = <$fCss> ) ) {
-            chomp $l;
-            my @hexaList = extractHexaList($l);
-            if (@hexaList) {
-                foreach (@hexaList) {
-                    $Body .=
-                      doLineGpl( hexa2rgb($_), extractComment($l) ) . "\n";
+          my $f = shift @_;
+          my $l = "";
+          open( $fCss, "<", $f ) or die("Echec ouverture du fichier css : $!");
+          while ( defined( $l = <$fCss> ) ) {
+              chomp $l;
+              my @hexaList = extractHexaList($l);
+              if (@hexaList) {
+                  foreach (@hexaList) {
+                      $Body .=
+                        doLineGpl( hexa2rgb($_), extractComment($l) ) . "\n";
+                }
+              }
+              if ( extractRgbHsl($l) ne '' ) {
+                  $Body .=
+                    doLineGpl( extractRgbHsl($l), extractComment($l) ) . "\n";
+              }
+              my @colorNameRgb = extractColorNamed($l);
+              if (@colorNameRgb) {
+                  foreach my $rgb (@colorNameRgb) {
+                      $Body .= doLineGpl( $rgb, extractComment($l) ) . "\n";
                 }
             }
-            if ( extractRgbHsl($l) ne '' ) {
-                $Body .=
-                  doLineGpl( extractRgbHsl($l), extractComment($l) ) . "\n";
+          }
+          my @sBody = split( "\n", $Body );
+          my %hashBody
+            ;    # hash pour dedoublonner sur clé  (never mind about comments)
+          foreach my $s (@sBody) {
+              for ($s) {
+                  s/^\s+//;     # supprime les blancs au début
+                  s/\s+$//;     # supprime les blancs à la fin
+                  s/\s+/ /g;    # minimise les blancs internes
+              }
+              if ( $s =~ m/^(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3})(\s+.*)$/g ) {
+                  $hashBody{$1} = $1 . $2;    #cle est la valeur <r g b>
             }
-            my @colorNameRgb = extractColorNamed($l);
-            if (@colorNameRgb) {
-                foreach my $rgb (@colorNameRgb) {
-                    $Body .= doLineGpl( $rgb, extractComment($l) ) . "\n";
-                }
-            }
-        }
-        my @sBody = split( "\n", $Body );
-        my %hashBody
-          ;    # hash pour dedoublonner sur clé  (never mind about comments)
-        foreach my $s (@sBody) {
-            for ($s) {
-                s/^\s+//;     # supprime les blancs au début
-                s/\s+$//;     # supprime les blancs à la fin
-                s/\s+/ /g;    # minimise les blancs internes
-            }
-            if ( $s =~ m/^(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3})(\s+.*)$/g ) {
-                $hashBody{$1} = $1 . $2;    #cle est la valeur <r g b>
-            }
-        }
+          }
 
-        # debug
-        foreach my $kk ( keys %hashBody ) {
-            print "|$kk| |" . %hashBody{$kk} . "|";
-        }
+          # debug
+          foreach my $kk ( keys %hashBody ) {
+              print "|$kk| |" . %hashBody{$kk} . "|";
+          }
 
-        $Body = "";
-        $m    = "rgb" unless defined $m;
-        $k    = "0" unless defined $k;
-        $s    = "0" unless defined $s;
-        ###########   DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
-        $Body .= sprintf( "%3d %3d %3d %s\n", split( " ", $_, 4 ) )
-          foreach ( sortQuery2( \%hashBody, $m, $k, $s ) );
-        print "Here the Body :\n" . $Body . "\n";
-        return $Body;
+          $Body = "";
+          $m    = "rgb" unless defined $m;
+          $k    = "0" unless defined $k;
+          $s    = "0" unless defined $s;
+          ###########   DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
+          $Body .= sprintf( "%3d %3d %3d %s\n", split( " ", $_, 4 ) )
+            foreach ( sortQuery2( \%hashBody, $m, $k, $s ) );
+          print "Here the Body :\n" . $Body . "\n";
+          return $Body;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -349,42 +350,43 @@ EOF
 # return:
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub sortQuery {
-        my %hashLine = %{ shift() };
-        my $model    = shift @_;       # parametre modele de tri rgb ou hsv
-        my $clef  = shift @_;  # critere de tri sur r/g/b ou bien h/s/v (0,1,2)
-        my $order = shift @_;  # sens du tri 0 ou 1 soit ascendant ou descendant
-        my %sort;
+          my %hashLine = %{ shift() };
+          my $model    = shift @_;       # parametre modele de tri rgb ou hsv
+          my $clef = shift @_;  # critere de tri sur r/g/b ou bien h/s/v (0,1,2)
+          my $order =
+            shift @_;    # sens du tri 0 ou 1 soit ascendant ou descendant
+          my %sort;
 
-        say Dumper %hashLine;
-        say Dumper $model;
-        say Dumper $clef;
-        say Dumper $order;
+          say Dumper %hashLine;
+          say Dumper $model;
+          say Dumper $clef;
+          say Dumper $order;
 
-        if ( $model eq "hsv" ) {
-            foreach ( values %hashLine ) {
-                my ( $h, $s, $v ) = rgb2hsv( split " ", $_ );
-                $sort{ $h . " " . $s . " " . $v } = $_;
-            }
-            my @keySort       = keys %sort;
-            my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
-            say Dumper @dataKeySorted;
-            return @sort{@dataKeySorted};
-        }
-        else {    # tri rgb par defaut
-            my $Line;
-            if ( $order == "1" ) {
-                foreach my $key ( reverse sort keys %hashLine ) {
-                    $Line .= sprintf( "%3d %3d %3d %s\n",
-                        split( " ", $hashLine{$key}, 4 ) );
+          if ( $model eq "hsv" ) {
+              foreach ( values %hashLine ) {
+                  my ( $h, $s, $v ) = rgb2hsv( split " ", $_ );
+                  $sort{ $h . " " . $s . " " . $v } = $_;
+              }
+              my @keySort = keys %sort;
+              my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
+              say Dumper @dataKeySorted;
+              return @sort{@dataKeySorted};
+          }
+          else {    # tri rgb par defaut
+              my $Line;
+              if ( $order == "1" ) {
+                  foreach my $key ( reverse sort keys %hashLine ) {
+                      $Line .= sprintf( "%3d %3d %3d %s\n",
+                          split( " ", $hashLine{$key}, 4 ) );
                 }
-            }
-            else {
-                foreach my $key ( sort keys %hashLine ) {
-                    $Line .= sprintf( "%3d %3d %3d %s\n",
-                        split( " ", $hashLine{$key}, 4 ) );
+              }
+              else {
+                  foreach my $key ( sort keys %hashLine ) {
+                      $Line .= sprintf( "%3d %3d %3d %s\n",
+                          split( " ", $hashLine{$key}, 4 ) );
                 }
-            }
-            return $Line;
+              }
+              return $Line;
         }
     }
 
@@ -395,34 +397,35 @@ EOF
 # return:
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub sortQuery2 {
-        my %hashLine = %{ shift() };
-        my $model    = shift @_;       # parametre modele de tri rgb ou hsv
-        my $clef  = shift @_;  # critere de tri sur r/g/b ou bien h/s/v (0,1,2)
-        my $order = shift @_;  # sens du tri 0 ou 1 soit ascendant ou descendant
-        my %sort;
-        my @keySort;
-        say Dumper %hashLine;
-        say Dumper $model;
-        say Dumper $clef;
-        say Dumper $order;
+          my %hashLine = %{ shift() };
+          my $model    = shift @_;       # parametre modele de tri rgb ou hsv
+          my $clef = shift @_;  # critere de tri sur r/g/b ou bien h/s/v (0,1,2)
+          my $order =
+            shift @_;    # sens du tri 0 ou 1 soit ascendant ou descendant
+          my %sort;
+          my @keySort;
+          say Dumper %hashLine;
+          say Dumper $model;
+          say Dumper $clef;
+          say Dumper $order;
 
-        if ( $model eq "hsv" ) {
-            foreach ( values %hashLine ) {
-                my ( $h, $s, $v ) = rgb2hsv( split " ", $_ );
-                $sort{ $h . " " . $s . " " . $v } = $_;
-            }
-            @keySort = keys %sort;
-        }
-        else {
-            @keySort = keys %hashLine;
-        }
+          if ( $model eq "hsv" ) {
+              foreach ( values %hashLine ) {
+                  my ( $h, $s, $v ) = rgb2hsv( split " ", $_ );
+                  $sort{ $h . " " . $s . " " . $v } = $_;
+              }
+              @keySort = keys %sort;
+          }
+          else {
+              @keySort = keys %hashLine;
+          }
 
-        my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
-        print "Dumper avant sortie sortQuery2\n";
-        say Dumper @dataKeySorted;
-        ( $model eq "hsv" )
-          ? return @sort{@dataKeySorted}
-          : return @hashLine{@dataKeySorted};
+          my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
+          print "Dumper avant sortie sortQuery2\n";
+          say Dumper @dataKeySorted;
+          ( $model eq "hsv" )
+            ? return @sort{@dataKeySorted}
+            : return @hashLine{@dataKeySorted};
 
     }
 
@@ -433,16 +436,16 @@ EOF
 # return: le commentaire format GPL
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub extractComment {
-        my $line = shift @_;
-        my $patternComment =
-          ';\s*\/\*(.*)\*\/';    #extrait commentaire bout de ligne
-        if ( $line =~ /$patternComment/ ) {
-            my $cmt = $1;
-            $cmt =~ s/^\s+|\s+$//g;             #trim: left and right
-            $cmt =~ s/((\*\/)|(\/\*))\s*//g;    #suppr: espace*/espace/*espace
-            return $cmt;
-        }
-        return "";
+          my $line = shift @_;
+          my $patternComment =
+            ';\s*\/\*(.*)\*\/';    #extrait commentaire bout de ligne
+          if ( $line =~ /$patternComment/ ) {
+              my $cmt = $1;
+              $cmt =~ s/^\s+|\s+$//g;             #trim: left and right
+              $cmt =~ s/((\*\/)|(\/\*))\s*//g;    #suppr: espace*/espace/*espace
+              return $cmt;
+          }
+          return "";
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -453,28 +456,28 @@ EOF
 # /!\ CSS4 #ff00ffaa | #f0fa ->canal alpha en hexa non implementé /!\
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub extractHexa {
-        my $line = shift @_;
-        my $pattern =
-          "#([a-fA-F0-9]{6})|#([a-fA-F0-9]{3})";    # code #ABCDEF ou #ABC
-        my $match = "";
+          my $line = shift @_;
+          my $pattern =
+            "#([a-fA-F0-9]{6})|#([a-fA-F0-9]{3})";    # code #ABCDEF ou #ABC
+          my $match = "";
 
-        if ( $line =~ /$pattern/g ) {
-            $match = defined $1 ? $1 : $2;
-        }
-        return $match;
+          if ( $line =~ /$pattern/g ) {
+              $match = defined $1 ? $1 : $2;
+          }
+          return $match;
     }
 
     # version List
     sub extractHexaList {
-        my $line = shift @_;
-        my $pattern =
-          "#([a-fA-F0-9]{6})|#([a-fA-F0-9]{3})";    # code #ABCDEF ou #ABC
-        my @r = ();
-        if ( my @hexa = ( $line =~ /$pattern/g ) ) {
-            foreach (@hexa) { push @r, $_ if defined $_ }
-            return @r;
-        }
-        return @r;
+          my $line = shift @_;
+          my $pattern =
+            "#([a-fA-F0-9]{6})|#([a-fA-F0-9]{3})";    # code #ABCDEF ou #ABC
+          my @r = ();
+          if ( my @hexa = ( $line =~ /$pattern/g ) ) {
+              foreach (@hexa) { push @r, $_ if defined $_ }
+              return @r;
+          }
+          return @r;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -485,18 +488,18 @@ EOF
 # /!\ il y' a plus de 140 couleurs nommées car grey=gray => 148 couleurs     /!\
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub extractColorNamed {
-        my $line = shift @_;
-        my @rgb  = ();
+          my $line = shift @_;
+          my @rgb  = ();
 
-        #my @key = keys(%IDlistNameColor);
-        foreach my $colorName ( keys(%IDlistNameColor) ) {
-            if ( my $test = ( $line =~ /:.*(?:\s*|,|:)\b($colorName)\b.*;/i )
-              )    #capture que le dernier
-            {
-                push @rgb, colorName2rgb($colorName);
+          #my @key = keys(%IDlistNameColor);
+          foreach my $colorName ( keys(%IDlistNameColor) ) {
+              if ( my $test = ( $line =~ /:.*(?:\s*|,|:)\b($colorName)\b.*;/i )
+                )    #capture que le dernier
+              {
+                  push @rgb, colorName2rgb($colorName);
             }
-        }
-        return @rgb;
+          }
+          return @rgb;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -512,66 +515,68 @@ EOF
 # return: le format GPL de la couleur
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub extractRgbHsl {
-        my $line = shift @_;
-        my $patternStrictRgb =
-          '(rgb)a?\(\s*(\d{1,3})%\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%.*\)';
-        my $patternStrictHsl =
+          my $line = shift @_;
+          my $patternStrictRgb =
+            '(rgb)a?\(\s*(\d{1,3})%\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%.*\)';
+          my $patternStrictHsl =
 '(?:hsl)a?\(\s*(\d*?\.?\d*)(deg|grad|rad|turn)\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%.*\)';
 
 # admet les pourcentage decimaux, sans unite d'angle (degre par defaut) et l'expression sans virgule separatrice:
 # (?:hsl)a?\(\s*(\d*?\.?\d*)(deg|grad|rad|turn|)?\s*,?\s*(\d*\.?\d*)%\s*,?\s*(\d*\.?\d*)%
 # A TESTER
-        my $patternRgbHsl =
-          '(rgb|hsl)a?\(\s*(\d{1,3})\s*,\s*(\d{1,3})%?\s*,\s*(\d{1,3})%?.*\)';
-        my $match = "";
-        my $sRgb;
-        my $sHsl;
-        my @Rgb;
-        my $sCmt;    # commentaire
+          my $patternRgbHsl =
+            '(rgb|hsl)a?\(\s*(\d{1,3})\s*,\s*(\d{1,3})%?\s*,\s*(\d{1,3})%?.*\)';
+          my $match = "";
+          my $sRgb;
+          my $sHsl;
+          my @Rgb;
+          my $sCmt;    # commentaire
 
-        # https://developer.mozilla.org/fr/docs/Web/CSS/Type_color
-        # pattern strict Rgb avec % -> 0..255 arrondi
-        if ( $line =~ /$patternStrictRgb/ ) {
-            my ( $t, $r, $g, $b ) = ( $1, $2 * 2.55, $3 * 2.55, $4 * 2.55 );
-            $sRgb = sprintf( "%3.f %3.f %3.f", $r, $g, $b );    #arrondi float
-            $sRgb =~ s/^\s+|\s+$//g;
-            return $sRgb;
-        }
+          # https://developer.mozilla.org/fr/docs/Web/CSS/Type_color
+          # pattern strict Rgb avec % -> 0..255 arrondi
+          if ( $line =~ /$patternStrictRgb/ ) {
+              my ( $t, $r, $g, $b ) = ( $1, $2 * 2.55, $3 * 2.55, $4 * 2.55 );
+              $sRgb = sprintf( "%3.f %3.f %3.f", $r, $g, $b );    #arrondi float
+              $sRgb =~ s/^\s+|\s+$//g;
+              return $sRgb;
+          }
 
-        #pattern strict Hsl $u=$2:deg-grad-rad-turn -> deg
-        if ( $line =~ /$patternStrictHsl/ ) {
-            my ( $h, $u, $s, $l ) = ( $1, $2, $3, $4 );
-            if ( $u =~ /deg/ ) {
-                $h = 360 * remainder( $h, 360.0 );
-            }
-            elsif ( $u =~ /grad/ ) {
-                $h = 360 * remainder( $h * ( 180.0 / 200.0 ), 360 );
-            }
-            elsif ( $u =~ /rad/ ) {
-                $h = 360 * remainder( $h * 180.0 / 3.14159, 360.0 );
-            }
-            elsif ( $u =~ /turn/ ) { $h = 360 * remainder( $h * 360.0, 360 ); }
-            else {    # degré par defaut
-                $h = 360 * remainder( $h, 360.0 );
-            }
-            $sRgb = hsl2Rgb( $h, $s, $l );
-            $sRgb =~ s/^\s+|\s+$//g;
-            return $sRgb;
-        }
+          #pattern strict Hsl $u=$2:deg-grad-rad-turn -> deg
+          if ( $line =~ /$patternStrictHsl/ ) {
+              my ( $h, $u, $s, $l ) = ( $1, $2, $3, $4 );
+              if ( $u =~ /deg/ ) {
+                  $h = 360 * remainder( $h, 360.0 );
+              }
+              elsif ( $u =~ /grad/ ) {
+                  $h = 360 * remainder( $h * ( 180.0 / 200.0 ), 360 );
+              }
+              elsif ( $u =~ /rad/ ) {
+                  $h = 360 * remainder( $h * 180.0 / 3.14159, 360.0 );
+              }
+              elsif ( $u =~ /turn/ ) {
+                  $h = 360 * remainder( $h * 360.0, 360 );
+              }
+              else {    # degré par defaut
+                  $h = 360 * remainder( $h, 360.0 );
+              }
+              $sRgb = hsl2Rgb( $h, $s, $l );
+              $sRgb =~ s/^\s+|\s+$//g;
+              return $sRgb;
+          }
 
-        if ( $line =~ /$patternRgbHsl/ ) {
-            my ( $t, $r, $g, $b ) = ( $1, $2, $3, $4 );
-            if ( $t =~ /rgb/ ) {
-                $sRgb = sprintf( "%3d %3d %3d", $r, $g, $b );
-            }
-            elsif ( $t =~ /hsl/ ) {    # les positions r g b correspond h s l
-                $sRgb = hsl2Rgb( $r, $g, $b );
+          if ( $line =~ /$patternRgbHsl/ ) {
+              my ( $t, $r, $g, $b ) = ( $1, $2, $3, $4 );
+              if ( $t =~ /rgb/ ) {
+                  $sRgb = sprintf( "%3d %3d %3d", $r, $g, $b );
+              }
+              elsif ( $t =~ /hsl/ ) {    # les positions r g b correspond h s l
+                  $sRgb = hsl2Rgb( $r, $g, $b );
 
-            }
-            $sRgb =~ s/^\s+|\s+$//g;
-            return $sRgb;
-        }
-        else { return "" }
+              }
+              $sRgb =~ s/^\s+|\s+$//g;
+              return $sRgb;
+          }
+          else { return "" }
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -585,24 +590,24 @@ EOF
 # + un code source python ;)
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub hsl2Rgb {
-        my ( $h, $s, $l ) = @_;
-        ( $h, $s, $l ) = (
-            sprintf( "%.5f", $h / 360.0 ),
-            sprintf( "%.5f", $s / 100.0 ),
-            sprintf( "%.5f", $l / 100.0 )
-        );
-        my ( $r, $g, $b ) = ( $l * 255.0, $l * 255.0, $l * 255.0 );
-        if ( $s != 0.0 ) {
-            my $var_2 =
-              $l < 0.5 ? $l * ( 1.0 + $s ) : ( $l + $s ) - ( $s * $l );
-            my $var_1 = 2.0 * $l - $var_2;
-            $r = 255 * hue2Rgb( $var_1, $var_2, $h + ( 1.0 / 3.0 ) );
-            $g = 255 * hue2Rgb( $var_1, $var_2, $h );
-            $b = 255 * hue2Rgb( $var_1, $var_2, $h - ( 1.0 / 3.0 ) );
-        }
-        my $sRgb = sprintf( "%3.f %3.f %3.f", $r, $g, $b );    #arrondi float
-        $sRgb =~ s/^\s+|\s+$//g;
-        return $sRgb;
+          my ( $h, $s, $l ) = @_;
+          ( $h, $s, $l ) = (
+              sprintf( "%.5f", $h / 360.0 ),
+              sprintf( "%.5f", $s / 100.0 ),
+              sprintf( "%.5f", $l / 100.0 )
+          );
+          my ( $r, $g, $b ) = ( $l * 255.0, $l * 255.0, $l * 255.0 );
+          if ( $s != 0.0 ) {
+              my $var_2 =
+                $l < 0.5 ? $l * ( 1.0 + $s ) : ( $l + $s ) - ( $s * $l );
+              my $var_1 = 2.0 * $l - $var_2;
+              $r = 255 * hue2Rgb( $var_1, $var_2, $h + ( 1.0 / 3.0 ) );
+              $g = 255 * hue2Rgb( $var_1, $var_2, $h );
+              $b = 255 * hue2Rgb( $var_1, $var_2, $h - ( 1.0 / 3.0 ) );
+          }
+          my $sRgb = sprintf( "%3.f %3.f %3.f", $r, $g, $b );    #arrondi float
+          $sRgb =~ s/^\s+|\s+$//g;
+          return $sRgb;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -617,15 +622,15 @@ EOF
 # + un code source python ;)
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub hue2Rgb {
-        my ( $v1, $v2, $vH ) = @_;
-        while ( $vH < 0.0 ) { $vH += 1.0 }
-        while ( $vH > 1.0 ) { $vH -= 1.0 }
-        if ( 6 * $vH < 1.0 ) { return ( $v1 + ( $v2 - $v1 ) * 6.0 * $vH ) }
-        if ( 2 * $vH < 1.0 ) { return $v2 }
-        if ( 3 * $vH < 2.0 ) {
-            return ( $v1 + ( $v2 - $v1 ) * ( 4.0 - 6.0 * $vH ) );
-        }
-        return $v1;
+          my ( $v1, $v2, $vH ) = @_;
+          while ( $vH < 0.0 ) { $vH += 1.0 }
+          while ( $vH > 1.0 ) { $vH -= 1.0 }
+          if ( 6 * $vH < 1.0 ) { return ( $v1 + ( $v2 - $v1 ) * 6.0 * $vH ) }
+          if ( 2 * $vH < 1.0 ) { return $v2 }
+          if ( 3 * $vH < 2.0 ) {
+              return ( $v1 + ( $v2 - $v1 ) * ( 4.0 - 6.0 * $vH ) );
+          }
+          return $v1;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -635,32 +640,32 @@ EOF
 # return: le format GPL de la couleur
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub hexa2rgb {
-        my $hexa = shift @_;
-        my @rgb;
-        my $sRgb;
-        if ( length($hexa) == 6 ) {
-            push @rgb, substr( $hexa, 0, 2 ), substr( $hexa, 2, 2 ),
-              substr( $hexa, 4, 2 );
+          my $hexa = shift @_;
+          my @rgb;
+          my $sRgb;
+          if ( length($hexa) == 6 ) {
+              push @rgb, substr( $hexa, 0, 2 ), substr( $hexa, 2, 2 ),
+                substr( $hexa, 4, 2 );
 
-            #debug BEGIN
-            # test s//eg  TEST OK!
-            # $hexa =~ s/([[:xdigit:]]{2})/sprintf "%03d ",hex $1/eg ;
-            # $hexa =~ s/^\s+|\s+$//g ;
-            # print "\ntest : |", $hexa , "|" ;
-            #debug END
-        }
-        elsif ( length($hexa) == 3 ) {
-            push @rgb, substr( $hexa, 0, 1 ) x 2, substr( $hexa, 1, 1 ) x 2,
-              substr( $hexa, 2, 1 ) x 2;
+              #debug BEGIN
+              # test s//eg  TEST OK!
+              # $hexa =~ s/([[:xdigit:]]{2})/sprintf "%03d ",hex $1/eg ;
+              # $hexa =~ s/^\s+|\s+$//g ;
+              # print "\ntest : |", $hexa , "|" ;
+              #debug END
+          }
+          elsif ( length($hexa) == 3 ) {
+              push @rgb, substr( $hexa, 0, 1 ) x 2, substr( $hexa, 1, 1 ) x 2,
+                substr( $hexa, 2, 1 ) x 2;
 
          #print "\nhexa2rgb 3 digit ", $rgb[0] . " " . $rgb[1] . " " . $rgb[2] ;
-        }
-        else { return $sRgb; }
-        foreach (@rgb) {
-            $sRgb .= sprintf( "%03d ", hex $_ );
-        }
-        $sRgb =~ s/^\s+|\s+$//g;    #trim blanc debut et final
-        return $sRgb;
+          }
+          else { return $sRgb; }
+          foreach (@rgb) {
+              $sRgb .= sprintf( "%03d ", hex $_ );
+          }
+          $sRgb =~ s/^\s+|\s+$//g;    #trim blanc debut et final
+          return $sRgb;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -670,13 +675,14 @@ EOF
 # return: en format hexa ABCDEF
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub rgb2hexa {
-        my $rgb = shift @_;
-        $rgb =~ s/(?:0{0,2})(\d+)/$1/g
-          ; # enleve les 1 ou 2 zero debut de chaque r g b, ie: 009 -> 9 | 080 -> 80 | 125 ->125
-        my ( $r, $g, $b ) = split /\s+/, $rgb;
-        my $hexa =
-          sprintf( "\%2.2X\%2.2X\%2.2X", $r, $g, $b ); #3x2digits complete par 0
-        return $hexa;
+          my $rgb = shift @_;
+          $rgb =~ s/(?:0{0,2})(\d+)/$1/g
+            ; # enleve les 1 ou 2 zero debut de chaque r g b, ie: 009 -> 9 | 080 -> 80 | 125 ->125
+          my ( $r, $g, $b ) = split /\s+/, $rgb;
+          my $hexa =
+            sprintf( "\%2.2X\%2.2X\%2.2X", $r, $g, $b )
+            ;    #3x2digits complete par 0
+          return $hexa;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -687,33 +693,33 @@ EOF
 # return: une liste (h,s,v)
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub rgb2hsv {    #pour le tri de palette methode GIMP
-        my @rgb = @_;
-        my ( $red, $green, $blue ) = @_;    #@rgb
-        my @rgbs = ( sort { $a <=> $b } ( $red, $green, $blue ) );    # @rgb
-        my ( $minc, $maxc ) = ( $rgbs[0], pop(@rgbs) );
-        my $v = $maxc / 255.0;
-        return ( 0.0, 0.0, sprintf( "%3.1f", $v * 100 ) ) if $minc == $maxc;
-        my $deltac = $maxc - $minc;
-        my $s      = $deltac / $maxc;
-        my $rc     = ( $maxc - $red ) / $deltac;
-        my $gc     = ( $maxc - $green ) / $deltac;
-        my $bc     = ( $maxc - $blue ) / $deltac;
-        my $h;
+          my @rgb = @_;
+          my ( $red, $green, $blue ) = @_;    #@rgb
+          my @rgbs = ( sort { $a <=> $b } ( $red, $green, $blue ) );    # @rgb
+          my ( $minc, $maxc ) = ( $rgbs[0], pop(@rgbs) );
+          my $v = $maxc / 255.0;
+          return ( 0.0, 0.0, sprintf( "%3.1f", $v * 100 ) ) if $minc == $maxc;
+          my $deltac = $maxc - $minc;
+          my $s      = $deltac / $maxc;
+          my $rc     = ( $maxc - $red ) / $deltac;
+          my $gc     = ( $maxc - $green ) / $deltac;
+          my $bc     = ( $maxc - $blue ) / $deltac;
+          my $h;
 
-        if ( $red == $maxc ) {
-            $h = $bc - $gc;
-        }
-        elsif ( $green == $maxc ) {
-            $h = 2.0 + $rc - $bc;
-        }
-        else {
-            $h = 4.0 + $gc - $rc;
-        }
-        $h = sprintf( "%.f", 360 * remainder( $h, 6 ) );    # sur 360 degrée
-        $h += 360 if $h < 0;
-        $s = sprintf( "%.1f", $s * 100 );
-        $v = sprintf( "%.1f", $v * 100 );
-        return ( $h, $s, $v );
+          if ( $red == $maxc ) {
+              $h = $bc - $gc;
+          }
+          elsif ( $green == $maxc ) {
+              $h = 2.0 + $rc - $bc;
+          }
+          else {
+              $h = 4.0 + $gc - $rc;
+          }
+          $h = sprintf( "%.f", 360 * remainder( $h, 6 ) );    # sur 360 degrée
+          $h += 360 if $h < 0;
+          $s = sprintf( "%.1f", $s * 100 );
+          $v = sprintf( "%.1f", $v * 100 );
+          return ( $h, $s, $v );
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -726,46 +732,47 @@ EOF
 # remarques: /!\ Passage param1 par reference \@TABLEAU i.e. sortHsv( \@keyData, 0, 0 ); /!\
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub sortHsv {
-        my $hsvList   = shift @_;
-        my $criterion = shift @_;
-        my $order     = shift @_;
-        my @out       = ();
-        my ( $h, $s, $v );
-        ( $criterion == 1 )
-          ? ( $h, $s, $v ) = ( 1, 2, 0 )    # S puis V puis H
-          : ( $criterion == 2 ) ? ( $h, $s, $v ) = ( 2, 0, 1 ) # V puis H puis S
-          :                       $h = 0, $s = 1, $v = 2;      # H puis S puis V
-        @out =
-          map { $_->[0] }
-          sort {
-                 $a->[1] <=> $b->[1]
-              || $a->[2] <=> $b->[2]
-              || $a->[3] <=> $b->[3]
-          }
-          map { [ $_, (split)[ $h, $s, $v ] ] } @{$hsvList};
-        if ($order) { @out = reverse @out }
-        return @out;
+          my $hsvList   = shift @_;
+          my $criterion = shift @_;
+          my $order     = shift @_;
+          my @out       = ();
+          my ( $h, $s, $v );
+          ( $criterion == 1 )
+            ? ( $h, $s, $v ) = ( 1, 2, 0 )    # S puis V puis H
+            : ( $criterion == 2 )
+            ? ( $h, $s, $v ) = ( 2, 0, 1 )    # V puis H puis S
+            : $h = 0, $s = 1, $v = 2;         # H puis S puis V
+          @out =
+            map { $_->[0] }
+            sort {
+                   $a->[1] <=> $b->[1]
+                || $a->[2] <=> $b->[2]
+                || $a->[3] <=> $b->[3]
+            }
+            map { [ $_, (split)[ $h, $s, $v ] ] } @{$hsvList};
+          if ($order) { @out = reverse @out }
+          return @out;
     }
 ######### experimental #########################################################
     sub sortChannels {
-        my $channelList = shift @_;
-        my $criterion   = shift @_;
-        my $order       = shift @_;
-        my ( $c1, $c2, $c3 );
-        ( $criterion == 1 )
-          ? ( $c1, $c2, $c3 ) = ( 1, 2, 0 )    # S/G puis V/B puis H/R
-          : ( $criterion == 2 )
-          ? ( $c1, $c2, $c3 ) = ( 2, 0, 1 )    # V/B puis H/R puis S/G
-          : $c1 = 0, $c2 = 1, $c3 = 2;    # H/R puis S/G puis V/B par defaut
-        my @out =
-          map { $_->[0] }
-          sort {
-                 $a->[1] <=> $b->[1]
-              || $a->[2] <=> $b->[2]
-              || $a->[3] <=> $b->[3]
-          }
-          map { [ $_, (split)[ $c1, $c2, $c3 ] ] } @{$channelList};
-        ($order) ? return reverse @out : return @out;
+          my $channelList = shift @_;
+          my $criterion   = shift @_;
+          my $order       = shift @_;
+          my ( $c1, $c2, $c3 );
+          ( $criterion == 1 )
+            ? ( $c1, $c2, $c3 ) = ( 1, 2, 0 )    # S/G puis V/B puis H/R
+            : ( $criterion == 2 )
+            ? ( $c1, $c2, $c3 ) = ( 2, 0, 1 )    # V/B puis H/R puis S/G
+            : $c1 = 0, $c2 = 1, $c3 = 2;    # H/R puis S/G puis V/B par defaut
+          my @out =
+            map { $_->[0] }
+            sort {
+                   $a->[1] <=> $b->[1]
+                || $a->[2] <=> $b->[2]
+                || $a->[3] <=> $b->[3]
+            }
+            map { [ $_, (split)[ $c1, $c2, $c3 ] ] } @{$channelList};
+          ($order) ? return reverse @out : return @out;
     }
 ###################################################################################
 
@@ -776,16 +783,17 @@ EOF
 # return: en format gpl $R[0..255] $G[0..255] $B[0..255] ie: 000 255 068
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub colorName2rgb {
-        my $colorName = shift @_;
-        my @rgb       = $IDlistNameColor{ lc $colorName } =~
-          /([0-9A-Fa-f]{2})/g;    # ABCDEF->('AB','CD','EF')
-        my $sRgb;
-        foreach (@rgb) {
-            $sRgb .=
-              sprintf( "%03d ", hex $_ );  #force en hexa et converti en decimal
-        }
-        $sRgb =~ s/\s$//g;                 #trim blanc final
-        return $sRgb;
+          my $colorName = shift @_;
+          my @rgb       = $IDlistNameColor{ lc $colorName } =~
+            /([0-9A-Fa-f]{2})/g;    # ABCDEF->('AB','CD','EF')
+          my $sRgb;
+          foreach (@rgb) {
+              $sRgb .=
+                sprintf( "%03d ", hex $_ )
+                ;                   #force en hexa et converti en decimal
+          }
+          $sRgb =~ s/\s$//g;        #trim blanc final
+          return $sRgb;
     }
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -797,34 +805,35 @@ EOF
 # Ecrit dans la hash table $keys= couleur au format $value= commentaire extrait
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub doLineGpl {
-        my ( $color, $comment ) = @_;
-        $color =~
-          s/(?:0{0,2})(\d+)\s*/ $1/g;    #attention à garder l'espace avant $1
-        $color =~ s/^\s+|\s+$//g;
+          my ( $color, $comment ) = @_;
+          $color =~
+            s/(?:0{0,2})(\d+)\s*/ $1/g;   #attention à garder l'espace avant $1
+          $color =~ s/^\s+|\s+$//g;
 
-        #enleve les 0 en trop (pour la conversion en hexa)
-        unless ( exists( $ColorComment{$color} ) ) {
-            $ColorComment{$color} = rgb2hexa($color) . " " . $comment;
-        }
-        else {
-            $ColorComment{$color} .= " " . $comment;
-        }
-        my ( $r, $g, $b ) =
-          split( /\s+/, $color );        #recupere les r g b sur les espaces
-        my %rIDlistNameColor = reverse %IDlistNameColor;
-        if ( exists( $rIDlistNameColor{ rgb2hexa($color) } ) ) {
-            ( my $lineGpl = $ColorComment{$color} ) =~
+          #enleve les 0 en trop (pour la conversion en hexa)
+          unless ( exists( $ColorComment{$color} ) ) {
+              $ColorComment{$color} = rgb2hexa($color) . " " . $comment;
+          }
+          else {
+              $ColorComment{$color} .= " " . $comment;
+          }
+          my ( $r, $g, $b ) =
+            split( /\s+/, $color );       #recupere les r g b sur les espaces
+          my %rIDlistNameColor = reverse %IDlistNameColor;
+          if ( exists( $rIDlistNameColor{ rgb2hexa($color) } ) ) {
+              ( my $lineGpl = $ColorComment{$color} ) =~
 s/([[:xdigit:]]{6})\s(.*)/sprintf "%3d %3d %3d %s %-20s %-48.48s", $r, $g, $b, $1, $rIDlistNameColor{ rgb2hexa($color) },$2/eg;
-            return $lineGpl;
-        }
-        else {
-            return (
-                sprintf( "%3d %3d %3d ", $r, $g, $b ) . $ColorComment{$color} );
+              return $lineGpl;
+          }
+          else {
+              return (
+                  sprintf( "%3d %3d %3d ", $r, $g, $b )
+                    . $ColorComment{$color} );
         }
     }
 
 ########## __MAIN__ ############################################################
-    
+
     my $File    = $file_css;    # main dialog box inputs
     my $FileGpl = $file_gpl;
     $n = $name;                 #palette name
@@ -932,13 +941,13 @@ See GIMP user manual L<https://www.gimp.org/docs/>
 
 =head1 PARAMETERS
 
-    [PF_FILE,   "file_css", __"File CSS ",""],
-    [PF_FILE, "file_gpl", __"File GPL ", ""],
-    [PF_STRING, "name", __"Palette name ", ""],
-    [PF_SPINNER, "column", __"Column number ",1,[1,10,1]],
-    [PF_RADIO, "model", __"Select model ",0,[Rgb=>0,Hsv=>1]],
-    [PF_RADIO, "col", __"Order by column ", 0,[RH=>0,GS=>1,BV=>2]],
-    [PF_BOOL,"order", __"Order by ascending ", [ASC=>0,DESC=>1],"TRUE "],
+    [PF_FILE,   "file_css", "File CSS ",""],
+    [PF_FILE, "file_gpl", "File GPL ", ""],
+    [PF_STRING, "name", "Palette name ", ""],
+    [PF_SPINNER, "column", "Column number ",1,[1,10,1]],
+    [PF_RADIO, "model", "Select model ",0,[Rgb=>0,Hsv=>1]],
+    [PF_RADIO, "col", "Order by column ", 0,[RH=>0,GS=>1,BV=>2]],
+    [PF_BOOL,"order", "Order by ascending ", [ASC=>0,DESC=>1],"TRUE "],
 
 =head1 AUTHOR
 
