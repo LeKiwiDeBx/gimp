@@ -4,31 +4,32 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-Data::Dumper qw(Dumper)	css2gpl_plugin	/^use Data::Dumper qw(Dumper);$/;"	u
-File::Basename	css2gpl_plugin	/^use File::Basename;$/;"	u
-Gimp	css2gpl_plugin	/^use Gimp;$/;"	u
-Gimp::Fu	css2gpl_plugin	/^use Gimp::Fu;$/;"	u
-colorName2rgb	css2gpl_plugin	/^    sub colorName2rgb {$/;"	s
-doLineGpl	css2gpl_plugin	/^    sub doLineGpl {$/;"	s
-extractColorNamed	css2gpl_plugin	/^    sub extractColorNamed {$/;"	s
-extractComment	css2gpl_plugin	/^    sub extractComment {$/;"	s
-extractHexa	css2gpl_plugin	/^    sub extractHexa {$/;"	s
-extractHexaList	css2gpl_plugin	/^    sub extractHexaList {$/;"	s
-extractRgbHsl	css2gpl_plugin	/^    sub extractRgbHsl {$/;"	s
-hexa2rgb	css2gpl_plugin	/^    sub hexa2rgb {$/;"	s
-hsl2Rgb	css2gpl_plugin	/^    sub hsl2Rgb {$/;"	s
-hue2Rgb	css2gpl_plugin	/^    sub hue2Rgb {$/;"	s
-loadFileCss	css2gpl_plugin	/^    sub loadFileCss {$/;"	s
-message	css2gpl_plugin	/^    sub message {$/;"	s
-readFileCss	css2gpl_plugin	/^    sub readFileCss {$/;"	s
-remainder	css2gpl_plugin	/^    sub remainder {$/;"	s
-rgb2hexa	css2gpl_plugin	/^    sub rgb2hexa {$/;"	s
-rgb2hsv	css2gpl_plugin	/^    sub rgb2hsv {    #pour le tri de palette methode GIMP$/;"	s
-sortHsv	css2gpl_plugin	/^    sub sortHsv {$/;"	s
-sortQuery	css2gpl_plugin	/^    sub sortQuery {$/;"	s
-sortQuery2	css2gpl_plugin	/^    sub sortQuery2 {$/;"	s
-strict	css2gpl_plugin	/^use strict;$/;"	u
-v5.10	css2gpl_plugin	/^use v5.10;$/;"	u
-warnings	css2gpl_plugin	/^use warnings;$/;"	u
-writeBodyFileGpl	css2gpl_plugin	/^    sub writeBodyFileGpl {$/;"	s
-writeHeaderFileGpl	css2gpl_plugin	/^    sub writeHeaderFileGpl {$/;"	s
+Data::Dumper qw(Dumper)	css2gpl_plugin.pl	/^use Data::Dumper qw(Dumper);$/;"	u
+File::Basename	css2gpl_plugin.pl	/^use File::Basename;$/;"	u
+Gimp	css2gpl_plugin.pl	/^use Gimp;$/;"	u
+Gimp::Fu	css2gpl_plugin.pl	/^use Gimp::Fu;$/;"	u
+colorName2rgb	css2gpl_plugin.pl	/^    sub colorName2rgb {$/;"	s
+doLineGpl	css2gpl_plugin.pl	/^    sub doLineGpl {$/;"	s
+extractColorNamed	css2gpl_plugin.pl	/^    sub extractColorNamed {$/;"	s
+extractComment	css2gpl_plugin.pl	/^    sub extractComment {$/;"	s
+extractHexa	css2gpl_plugin.pl	/^    sub extractHexa {$/;"	s
+extractHexaList	css2gpl_plugin.pl	/^    sub extractHexaList {$/;"	s
+extractRgbHsl	css2gpl_plugin.pl	/^    sub extractRgbHsl {$/;"	s
+hexa2rgb	css2gpl_plugin.pl	/^    sub hexa2rgb {$/;"	s
+hsl2Rgb	css2gpl_plugin.pl	/^    sub hsl2Rgb {$/;"	s
+hue2Rgb	css2gpl_plugin.pl	/^    sub hue2Rgb {$/;"	s
+loadFileCss	css2gpl_plugin.pl	/^    sub loadFileCss {$/;"	s
+message	css2gpl_plugin.pl	/^    sub message {$/;"	s
+readFileCss	css2gpl_plugin.pl	/^    sub readFileCss {$/;"	s
+remainder	css2gpl_plugin.pl	/^    sub remainder {$/;"	s
+rgb2hexa	css2gpl_plugin.pl	/^    sub rgb2hexa {$/;"	s
+rgb2hsv	css2gpl_plugin.pl	/^    sub rgb2hsv {    #pour le tri de palette methode GIMP$/;"	s
+sortChannels	css2gpl_plugin.pl	/^    sub sortChannels {$/;"	s
+sortHsv	css2gpl_plugin.pl	/^    sub sortHsv {$/;"	s
+sortQuery	css2gpl_plugin.pl	/^    sub sortQuery {$/;"	s
+sortQuery2	css2gpl_plugin.pl	/^    sub sortQuery2 {$/;"	s
+strict	css2gpl_plugin.pl	/^use strict;$/;"	u
+v5.10	css2gpl_plugin.pl	/^use v5.10;$/;"	u
+warnings	css2gpl_plugin.pl	/^use warnings;$/;"	u
+writeBodyFileGpl	css2gpl_plugin.pl	/^    sub writeBodyFileGpl {$/;"	s
+writeHeaderFileGpl	css2gpl_plugin.pl	/^    sub writeHeaderFileGpl {$/;"	s

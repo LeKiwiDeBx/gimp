@@ -202,12 +202,12 @@ EOF
         print __"\nRecherche le fichier: " . basename($f) . "\n" if defined $f;
         if ( defined $f ) {
             open( $fCss, "<", $f )
-              or die __("Echec ouverture du fichier") . " $f : $!" );
-            print __("Ouverture du fichier") . " $f\n";
+              or die __"Echec ouverture du fichier" .  $f . ":" . $!;
+            print __"Ouverture du fichier" .  $f . "\n";
             &message($f);
 
         }
-        else { die __ "Nom du fichier css inconnu." }
+        else { die __"Nom du fichier css inconnu." }
 
     }
 
@@ -226,13 +226,13 @@ EOF
               unless ( $f =~ /^(\w+)/ ) { $f = $css; }
               if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
                   die
-"Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
+__"Le fichier". $1 . __".gpl existe. Choisir une autre nom ou le supprimer\n"
                     if -e "$1.gpl";
                   open( $fGpl, ">", $1 . ".gpl" )
                     or die("Echec ecriture du fichier : $1.gpl!");
                   $n = $1 unless defined $n;
               }
-              else { die __ "Echec ecriture du fichier gpl"; }
+              else { die __"Echec ecriture du fichier gpl"; }
           }
           else {
               if ( $css =~ /$NoExt/ ) {
@@ -277,7 +277,7 @@ EOF
                   open( $fGpl, ">>", $1 . ".gpl" )
                     or die("Echec ecriture du fichier : $1.gpl!");
               }
-              else { die __ "Echec ecriture du fichier gpl"; }
+              else { die __"Echec ecriture du fichier gpl"; }
           }
           print($Body );    #sortie ecran
           return my $success = print $fGpl $Body;
@@ -328,9 +328,9 @@ EOF
           }
 
           # debug
-          foreach my $kk ( keys %hashBody ) {
-              print "|$kk| |" . %hashBody{$kk} . "|";
-          }
+        #   foreach my $kk ( keys %hashBody ) {
+        #       print "|$kk| |" . $hashBody{$kk} . "|";
+        #   }
 
           $Body = "";
           $m    = "rgb" unless defined $m;
@@ -919,7 +919,7 @@ CSS file should have a .css extension.
 
 =head2    Activating the script :
 
- You can access it from GIMP menu: Palette -> Import from CSS... 
+ You can access it from GIMP menu: <Menu bar>  <Palette>  <Import from CSS...> 
 
 =head2    How to work it off ?
 
