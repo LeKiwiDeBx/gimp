@@ -6,7 +6,7 @@ use Gimp;
 use Gimp::Fu;
 use File::Basename;
 #use Locale::TextDomain qw(css2gpl_plugin ./locale/fr/LC_MESSAGES);
-use Data::Dumper qw(Dumper);
+#use Data::Dumper qw(Dumper);
 my $fCss;    # descripteur fichier CSS
 my $fGpl;    # descripteur fichier GPL
 my $Header =
@@ -230,7 +230,7 @@ EOF
 __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
                     if -e "$1.gpl";
                   open( $fGpl, ">", $1 . ".gpl" )
-                    or die("Failed to write file to disk : $1.gpl!");
+                    or die(__"Failed to write file to disk : ". $1.".gpl!");
                   $n = $1 unless defined $n;
               }
               else { die __"Failed to write file gpl to disk"; }
@@ -241,10 +241,10 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
 __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
                     if -e "$1.gpl";
                   open( $fGpl, ">", $1 . ".gpl" )
-                    or die("Failed to write file to disk : $1.gpl!");
+                    or die(__"Failed to write file to disk : ". $1.".gpl!");
                   $n = $1 unless defined $n;
               }
-              else { die __ "Failed to write file gpl to disk"; }
+              else { die __"Failed to write file gpl to disk"; }
           }
           $n =~ s/^\s+|\s+$//g if defined $n;
           if ( defined $c ) { $c = 1 unless ( $c =~ /^\d+$/ ) }
@@ -267,16 +267,16 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
           my $NoExt =
             '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
           if ( defined $f ) {
-              unless ( $f =~ /^(\w+)/ ) { $f = $css; }
+              # unless ( $f =~ /^(\w+)/ ) { $f = $css; }
               if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
                   open( $fGpl, ">>", $1 . ".gpl" )
-                    or die("Failed to write file to disk : $1.gpl!");
+                    or die(__"Failed to write file to disk : ". $1.".gpl!");
             }
           }
           else {
               if ( $css =~ /$NoExt/ ) {
                   open( $fGpl, ">>", $1 . ".gpl" )
-                    or die("Failed to write file to disk : $1.gpl!");
+                    or die(__"Failed to write file to disk : ". $1.".gpl!");
               }
               else { die __"Failed to write file to disk gpl"; }
           }
@@ -293,7 +293,7 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
     sub readFileCss {
           my $f = shift @_;
           my $l = "";
-          open( $fCss, "<", $f ) or die("Failed to open file css : $!");
+          open( $fCss, "<", $f ) or die(__"Failed to open file css : ".$f);
           while ( defined( $l = <$fCss> ) ) {
               chomp $l;
               my @hexaList = extractHexaList($l);
@@ -328,19 +328,13 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
             }
           }
 
-          # debug
-        #   foreach my $kk ( keys %hashBody ) {
-        #       print "|$kk| |" . $hashBody{$kk} . "|";
-        #   }
-
           $Body = "";
           $m    = "rgb" unless defined $m;
           $k    = "0" unless defined $k;
           $s    = "0" unless defined $s;
-          ###########   DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
           $Body .= sprintf( "%3d %3d %3d %s\n", split( " ", $_, 4 ) )
             foreach ( sortQuery2( \%hashBody, $m, $k, $s ) );
-          print "Here the Body :\n" . $Body . "\n";
+          #print "Here the Body :\n" . $Body . "\n";
           return $Body;
     }
 
@@ -358,10 +352,10 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
             shift @_;    # sens du tri 0 ou 1 soit ascendant ou descendant
           my %sort;
 
-          say Dumper %hashLine;
-          say Dumper $model;
-          say Dumper $clef;
-          say Dumper $order;
+        #   say Dumper %hashLine;
+        #   say Dumper $model;
+        #   say Dumper $clef;
+        #   say Dumper $order;
 
           if ( $model eq "hsv" ) {
               foreach ( values %hashLine ) {
@@ -370,7 +364,7 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
               }
               my @keySort = keys %sort;
               my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
-              say Dumper @dataKeySorted;
+            #   say Dumper @dataKeySorted;
               return @sort{@dataKeySorted};
           }
           else {    # tri rgb par defaut
@@ -405,10 +399,10 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
             shift @_;    # sens du tri 0 ou 1 soit ascendant ou descendant
           my %sort;
           my @keySort;
-          say Dumper %hashLine;
-          say Dumper $model;
-          say Dumper $clef;
-          say Dumper $order;
+        #   say Dumper %hashLine;
+        #   say Dumper $model;
+        #   say Dumper $clef;
+        #   say Dumper $order;
 
           if ( $model eq "hsv" ) {
               foreach ( values %hashLine ) {
@@ -422,8 +416,8 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
           }
 
           my @dataKeySorted = sortHsv( \@keySort, $clef, $order );
-          print "Dumper avant sortie sortQuery2\n";
-          say Dumper @dataKeySorted;
+        #   print "Dumper avant sortie sortQuery2\n";
+        #   say Dumper @dataKeySorted;
           ( $model eq "hsv" )
             ? return @sort{@dataKeySorted}
             : return @hashLine{@dataKeySorted};
@@ -468,7 +462,14 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
           return $match;
     }
 
-    # version List
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+# version List
+# Extrait du fichier CSS le format #hexa[3 ou 6]
+# param: ligne en cours du fichier CSS
+# return: les formats hexa de la couleur <ABCDEF> ou <ABC> sous forme de liste
+# /!\ CSS4 #ff00ffaa | #f0fa ->canal alpha en hexa non implementé /!\
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub extractHexaList {
           my $line = shift @_;
           my $pattern =
@@ -754,7 +755,18 @@ __"File ". $1 . __".gpl exists. Choose another name or delete it\n"
           if ($order) { @out = reverse @out }
           return @out;
     }
+
 ######### experimental #########################################################
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# trie la liste @hsv sur un critere au choix H(ue) ou S(aturation) ou V(alue)
+# ou la liste @rgb sur un critere au choix R(ed) ou G(reen) ou B(lue) en sens
+# Ascendant 0 ou descendant 1.
+# param 1 : liste @hsv ou @rgb sous la forme ("channel1 Channel2 Channel3", [c1 c2 c3],...)
+# param 2 : critere H/R | S/G | V/B sous la forme 0 | 1 | 2
+# param 3 : sens du tri ascendant | descendant sous la forme 0 | 1
+# return : list hsv forme @hsv ou list rgb sous forme @rgb
+# remarques: /!\ Passage param1 par reference \@TABLEAU i.e. sortChannels( \@keyData, 0, 0 ); /!\
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub sortChannels {
           my $channelList = shift @_;
           my $criterion   = shift @_;
@@ -847,7 +859,6 @@ s/([[:xdigit:]]{6})\s(.*)/sprintf "%3d %3d %3d %s %-20s %-48.48s", $r, $g, $b, $
       if writeBodyFileGpl( $FileGpl, $File );
     print "\n";
 
-    #<Image>/File/Create/Palette/Import from CSS...
 };
 
 exit main;
