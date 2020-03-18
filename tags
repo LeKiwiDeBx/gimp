@@ -4,15 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-Data::Dumper qw(Dumper)	css2gpl_plugin	/^use Data::Dumper qw(Dumper);$/;"	u
-Data::Dumper qw(Dumper)	css2gpl_plugin.pl	/^use Data::Dumper qw(Dumper);$/;"	u
 File::Basename	css2gpl_plugin	/^use File::Basename;$/;"	u
 File::Basename	css2gpl_plugin.pl	/^use File::Basename;$/;"	u
 Gimp	css2gpl_plugin	/^use Gimp;$/;"	u
 Gimp	css2gpl_plugin.pl	/^use Gimp;$/;"	u
 Gimp::Fu	css2gpl_plugin	/^use Gimp::Fu;$/;"	u
 Gimp::Fu	css2gpl_plugin.pl	/^use Gimp::Fu;$/;"	u
-Locale::TextDomain qw (css2gpl_plugin ./locale/fr/LC_MESSAGES)	css2gpl_plugin	/^use Locale::TextDomain qw (css2gpl_plugin .\/locale\/fr\/LC_MESSAGES);$/;"	u
 colorName2rgb	css2gpl_plugin	/^    sub colorName2rgb {$/;"	s
 colorName2rgb	css2gpl_plugin.pl	/^    sub colorName2rgb {$/;"	s
 doLineGpl	css2gpl_plugin	/^    sub doLineGpl {$/;"	s

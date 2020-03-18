@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: css2gpl\n"
-"POT-Creation-Date: 2020-03-17 20:17+0100\n"
+"POT-Creation-Date: 2020-03-18 18:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: LeKiwiDeBx <LeKiwiDeBx@chezmoi.fr>\n"
 "Language-Team: LeKiwiDeBx <Trad Team>\n"
@@ -19,20 +19,22 @@ msgstr ""
 #: css2gpl_plugin.pl:202
 msgid ""
 "\n"
-"Recherche le fichier: "
+"Searching file : "
 msgstr ""
+"\n"
+"Recherche le fichier : "
 
 #: css2gpl_plugin.pl:205
-msgid "Echec ouverture du fichier"
-msgstr ""
+msgid "Failed to open file "
+msgstr "Échec à l'ouverture du fichier "
 
 #: css2gpl_plugin.pl:206
-msgid "Ouverture du fichier"
-msgstr ""
+msgid "Open file "
+msgstr "Ouverture du fichier "
 
 #: css2gpl_plugin.pl:210
-msgid "Nom du fichier css inconnu."
-msgstr ""
+msgid "File name css unknown."
+msgstr "Nom du fichier css inconnu."
 
 #: css2gpl_plugin.pl:230 css2gpl_plugin.pl:241
 msgid "File "
@@ -42,15 +44,24 @@ msgstr "Fichier "
 msgid ".gpl exists. Choose another name or delete it\n"
 msgstr ".gpl existe.Choisir un autre nom ou supprimer le fichier\n"
 
+#: css2gpl_plugin.pl:233 css2gpl_plugin.pl:244 css2gpl_plugin.pl:273
+#: css2gpl_plugin.pl:279
+msgid "Failed to write file to disk : "
+msgstr "Échec à l'écriture du fichier sur disque : "
+
 #: css2gpl_plugin.pl:236 css2gpl_plugin.pl:247
 msgid "Failed to write file gpl to disk"
-msgstr "Échec à l'ouverture du fichier gpl sur disque"
+msgstr "Échec à l'écriture du fichier gpl sur disque"
 
 #: css2gpl_plugin.pl:281
 msgid "Failed to write file to disk gpl"
-msgstr "Échec à l'ouverture du fichier gpl"
+msgstr "Échec à l'écriture du fichier gpl"
 
-#: css2gpl_plugin.pl:844
+#: css2gpl_plugin.pl:296
+msgid "Failed to open file css : "
+msgstr "Échec à l'ouverture du fichier css : "
+
+#: css2gpl_plugin.pl:856
 msgid ""
 "\n"
 "Write text to file gpl (header)"
@@ -58,7 +69,7 @@ msgstr ""
 "\n"
 "Écriture du texte dans le fichier gpl (en tête)"
 
-#: css2gpl_plugin.pl:846
+#: css2gpl_plugin.pl:858
 msgid ""
 "\n"
 "Write text to file gpl (data)"

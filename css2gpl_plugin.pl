@@ -199,15 +199,15 @@ EOF
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub loadFileCss {
         my $f = shift @_;
-        print __"\nRecherche le fichier: " . basename($f) . "\n" if defined $f;
+        print __"\nSearching file : " . basename($f) . "\n" if defined $f;
         if ( defined $f ) {
             open( $fCss, "<", $f )
-              or die __"Echec ouverture du fichier" .  $f . ":" . $!;
-            print __"Ouverture du fichier" .  $f . "\n";
+              or die __"Failed to open file " .  $f . ":" . $!;
+            print __"Open file " .  $f . "\n";
             &message($f);
 
         }
-        else { die __"Nom du fichier css inconnu." }
+        else { die __"File name css unknown." }
 
     }
 
