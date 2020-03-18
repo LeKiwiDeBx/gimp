@@ -1,68 +1,67 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: css2gpl 1.0\n"
-"POT-Creation-Date: 2020-03-15 15:23+0100\n"
-"PO-Revision-Date: 2020-03-15 15:25+0100\n"
+"Project-Id-Version: css2gpl\n"
+"POT-Creation-Date: 2020-03-17 20:17+0100\n"
+"PO-Revision-Date: \n"
 "Last-Translator: LeKiwiDeBx <LeKiwiDeBx@chezmoi.fr>\n"
-"Language-Team: LeKiwiDeBx\n"
-"Language: fr\n"
+"Language-Team: LeKiwiDeBx <Trad Team>\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-KeywordsList: __;N_\n"
-"X-Poedit-SearchPath-0: css2gpl_plugin.pl\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: css2gpl_plugin.pl\n"
 
 #: css2gpl_plugin.pl:202
 msgid ""
 "\n"
 "Recherche le fichier: "
 msgstr ""
-"\n"
-"TRAD Recherche le fichier: "
 
 #: css2gpl_plugin.pl:205
 msgid "Echec ouverture du fichier"
-msgstr "TRAD Echec ouverture du fichier gpl"
+msgstr ""
 
 #: css2gpl_plugin.pl:206
 msgid "Ouverture du fichier"
-msgstr "TRAD Echec ouverture du fichier gpl"
+msgstr ""
 
 #: css2gpl_plugin.pl:210
 msgid "Nom du fichier css inconnu."
-msgstr "TRAD Nom du fichier css inconnu."
+msgstr ""
 
-#: css2gpl_plugin.pl:229
-msgid "Le fichier"
-msgstr "TRAD Le fichier"
+#: css2gpl_plugin.pl:230 css2gpl_plugin.pl:241
+msgid "File "
+msgstr "Fichier "
 
-#: css2gpl_plugin.pl:229
-msgid ".gpl existe. Choisir une autre nom ou le supprimer\n"
-msgstr "TRAD .gpl existe. Choisir une autre nom ou le supprimer\n"
+#: css2gpl_plugin.pl:230 css2gpl_plugin.pl:241
+msgid ".gpl exists. Choose another name or delete it\n"
+msgstr ".gpl existe.Choisir un autre nom ou supprimer le fichier\n"
 
-#: css2gpl_plugin.pl:235 css2gpl_plugin.pl:246 css2gpl_plugin.pl:280
-msgid "Echec ecriture du fichier gpl"
-msgstr "TRAD Echec ecriture du fichier gpl"
+#: css2gpl_plugin.pl:236 css2gpl_plugin.pl:247
+msgid "Failed to write file gpl to disk"
+msgstr "Échec à l'ouverture du fichier gpl sur disque"
 
-#: css2gpl_plugin.pl:843
+#: css2gpl_plugin.pl:281
+msgid "Failed to write file to disk gpl"
+msgstr "Échec à l'ouverture du fichier gpl"
+
+#: css2gpl_plugin.pl:844
 msgid ""
 "\n"
-"Ecriture du fichier gpl (en tête)"
+"Write text to file gpl (header)"
 msgstr ""
 "\n"
-"TRAD Ecriture du fichier gpl (en tête)"
+"Écriture du texte dans le fichier gpl (en tête)"
 
-#: css2gpl_plugin.pl:845
+#: css2gpl_plugin.pl:846
 msgid ""
 "\n"
-"Ecriture du fichier gpl (données)"
+"Write text to file gpl (data)"
 msgstr ""
 "\n"
-"TRAD Ecriture du fichier gpl (données)"
-
-#~ msgid "Hide this notification message"
-#~ msgstr "Masquer ce message de notification"
+"Écriture du texte dans le fichier gpl (données)"

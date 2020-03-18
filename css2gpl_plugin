@@ -5,7 +5,7 @@ use warnings;
 use Gimp;
 use Gimp::Fu;
 use File::Basename;
-
+#use Locale::TextDomain qw(css2gpl_plugin ./locale/fr/LC_MESSAGES);
 use Data::Dumper qw(Dumper);
 my $fCss;    # descripteur fichier CSS
 my $fGpl;    # descripteur fichier GPL
@@ -220,30 +220,31 @@ EOF
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     sub writeHeaderFileGpl {
           my ( $f, $css ) = @_;
+          print "\nf:$f  css:$css\n";
           my $NoExt =
             '(.+?)(\.[^\.]*+$|$)';    #suppr toute extension (.+?)(\.[^\.]+$|$)
           if ( defined $f ) {
-              unless ( $f =~ /^(\w+)/ ) { $f = $css; }
+            # $f = $css unless ( $f =~ /^(\w+)/ ) ;
               if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
                   die
-__"Le fichier". $1 . __".gpl existe. Choisir une autre nom ou le supprimer\n"
+__"File ". $1 . __".gpl exists. Choose another name or delete it\n"
                     if -e "$1.gpl";
                   open( $fGpl, ">", $1 . ".gpl" )
-                    or die("Echec ecriture du fichier : $1.gpl!");
+                    or die("Failed to write file to disk : $1.gpl!");
                   $n = $1 unless defined $n;
               }
-              else { die __"Echec ecriture du fichier gpl"; }
+              else { die __"Failed to write file gpl to disk"; }
           }
           else {
               if ( $css =~ /$NoExt/ ) {
                   die
-"Le fichier $1.gpl existe. Choisir une autre nom ou le supprimer\n"
+__"File ". $1 . __".gpl exists. Choose another name or delete it\n"
                     if -e "$1.gpl";
                   open( $fGpl, ">", $1 . ".gpl" )
-                    or die("Echec ecriture du fichier : $1.gpl!");
+                    or die("Failed to write file to disk : $1.gpl!");
                   $n = $1 unless defined $n;
               }
-              else { die __ "Echec ecriture du fichier gpl"; }
+              else { die __ "Failed to write file gpl to disk"; }
           }
           $n =~ s/^\s+|\s+$//g if defined $n;
           if ( defined $c ) { $c = 1 unless ( $c =~ /^\d+$/ ) }
@@ -269,15 +270,15 @@ __"Le fichier". $1 . __".gpl existe. Choisir une autre nom ou le supprimer\n"
               unless ( $f =~ /^(\w+)/ ) { $f = $css; }
               if ( defined( $f =~ /$NoExt/ ) && length($f) != 0 ) {
                   open( $fGpl, ">>", $1 . ".gpl" )
-                    or die("Echec ecriture du fichier : $1.gpl!");
+                    or die("Failed to write file to disk : $1.gpl!");
             }
           }
           else {
               if ( $css =~ /$NoExt/ ) {
                   open( $fGpl, ">>", $1 . ".gpl" )
-                    or die("Echec ecriture du fichier : $1.gpl!");
+                    or die("Failed to write file to disk : $1.gpl!");
               }
-              else { die __"Echec ecriture du fichier gpl"; }
+              else { die __"Failed to write file to disk gpl"; }
           }
           print($Body );    #sortie ecran
           return my $success = print $fGpl $Body;
@@ -292,7 +293,7 @@ __"Le fichier". $1 . __".gpl existe. Choisir une autre nom ou le supprimer\n"
     sub readFileCss {
           my $f = shift @_;
           my $l = "";
-          open( $fCss, "<", $f ) or die("Echec ouverture du fichier css : $!");
+          open( $fCss, "<", $f ) or die("Failed to open file css : $!");
           while ( defined( $l = <$fCss> ) ) {
               chomp $l;
               my @hexaList = extractHexaList($l);
@@ -840,9 +841,9 @@ s/([[:xdigit:]]{6})\s(.*)/sprintf "%3d %3d %3d %s %-20s %-48.48s", $r, $g, $b, $
     $c = $column;               #palette number column
     loadFileCss($File);
     readFileCss($File);
-    print __"\nEcriture du fichier gpl (en tête)"
+    print __"\nWrite text to file gpl (header)"
       if writeHeaderFileGpl( $FileGpl, $File );
-    print __"\nEcriture du fichier gpl (données)"
+    print __"\nWrite text to file gpl (data)"
       if writeBodyFileGpl( $FileGpl, $File );
     print "\n";
 
