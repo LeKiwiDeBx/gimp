@@ -5,6 +5,7 @@ use warnings;
 use Gimp;
 use Gimp::Fu;
 use File::Basename;
+#             A DETERMINER POUR TRADUCTION
 #use Locale::TextDomain qw(css2gpl_plugin ./locale/fr/LC_MESSAGES);
 #use Data::Dumper qw(Dumper);
 my $fCss;    # descripteur fichier CSS
